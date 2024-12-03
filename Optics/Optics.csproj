@@ -272,6 +272,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="file\optics.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="file\structure.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="photo\icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

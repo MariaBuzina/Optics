@@ -96,5 +96,29 @@ namespace Optics
         {
             button1.Enabled = true;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Вы уверены, что хотите восстановить структуру БД?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                MySqlConnection mySqlConnection = new MySqlConnection(Connection.conn);
+                mySqlConnection.Open();
+
+                string pathFile = Directory.GetCurrentDirectory() + @"\file\structure.sql";
+                string textFile = File.ReadAllText(pathFile);
+                MySqlCommand mySqlCommand = new MySqlCommand(textFile, mySqlConnection);
+                mySqlCommand.ExecuteNonQuery();
+
+                mySqlConnection.Close();
+
+                MessageBox.Show("Структура базы данных успешно восстановлена!", "Сообщение пользователю", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
