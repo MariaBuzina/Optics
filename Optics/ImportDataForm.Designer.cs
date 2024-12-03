@@ -44,7 +44,7 @@ namespace Optics
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Sitka Banner", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button2.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.button2.Location = new System.Drawing.Point(17, 221);
+            this.button2.Location = new System.Drawing.Point(17, 217);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(265, 44);
             this.button2.TabIndex = 11;
@@ -68,6 +68,7 @@ namespace Optics
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(265, 36);
             this.comboBox1.TabIndex = 69;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // button3
             // 
@@ -76,7 +77,7 @@ namespace Optics
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Sitka Banner", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button3.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.button3.Location = new System.Drawing.Point(17, 171);
+            this.button3.Location = new System.Drawing.Point(17, 167);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(265, 44);
             this.button3.TabIndex = 70;
@@ -96,13 +97,14 @@ namespace Optics
             this.button1.TabIndex = 71;
             this.button1.Text = "Импортировать";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ImportDataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
-            this.ClientSize = new System.Drawing.Size(301, 284);
+            this.ClientSize = new System.Drawing.Size(301, 280);
             this.ControlBox = false;
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button3);
