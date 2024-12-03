@@ -118,7 +118,10 @@ namespace Optics
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            AuthorizationForm authorizationForm = new AuthorizationForm();
+            this.Visible = false;
+            authorizationForm.ShowDialog();
+            this.Close();
         }
     }
 }

@@ -36,18 +36,34 @@ namespace Optics
             }
             else
             {
-                //try
-                //{
+                if (textBox1.Text == "admin")
+                {
+                    if (textBox2.Text == "admin")
+                    {
+                        MessageBox.Show("Успешная авторизация!", "Сообщение пользователю", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ImportDataForm importData = new ImportDataForm();
+                        this.Visible = false;
+                        importData.ShowDialog();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка авторизации! Неверный логин или пароль.", "Сообщение пользователю", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBox1.Clear();
+                        textBox2.Clear();
+                        button1.Enabled = false;
+                    }
+                }
+                try
+                {
                     Authorization();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Ошибка авторизации! Такого пользователя не существует!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     textBox1.Clear();
                     textBox2.Clear();
-                //}
-                //catch (Exception)
-                //{
-                //    MessageBox.Show("Ошибка авторизации! Такого пользователя не существует!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    textBox1.Clear();
-                //    textBox2.Clear();
-                //}
+                }
             }
         }
         string GetHashPass(string password)
@@ -103,7 +119,10 @@ namespace Optics
             }
             else
             {
-                MessageBox.Show("Ошибка авторизации! Неверные логин или пароль", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ошибка авторизации! Неверный логин или пароль", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBox1.Clear();
+                textBox2.Clear();
+                button1.Enabled = false;
             }
             connection.Close();
         }
