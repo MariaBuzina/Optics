@@ -118,6 +118,7 @@ namespace Optics
             this.Name = "ImportDataForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Оптика Визион - Импорт и восстановление";
+            this.Load += new System.EventHandler(this.ImportDataForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
