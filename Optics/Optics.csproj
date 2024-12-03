@@ -137,6 +137,12 @@
     <Compile Include="HandbooksViewForm.Designer.cs">
       <DependentUpon>HandbooksViewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImportDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportDataForm.Designer.cs">
+      <DependentUpon>ImportDataForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,6 +223,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HandbooksViewForm.resx">
       <DependentUpon>HandbooksViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportDataForm.resx">
+      <DependentUpon>ImportDataForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManagerForm.resx">
       <DependentUpon>ManagerForm.cs</DependentUpon>
