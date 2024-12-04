@@ -52,6 +52,7 @@ namespace Optics
                         textBox1.Clear();
                         textBox2.Clear();
                         button1.Enabled = false;
+                        return;
                     }
                 }
                 try

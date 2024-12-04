@@ -19,7 +19,16 @@ namespace Optics
             InitializeComponent();
         }
 
-        private void ImportDataForm_Load(object sender, EventArgs e)
+        private void DbExists()
+        {
+            MySqlConnection connection = new MySqlConnection("host=localhost; uid=root; pwd=");
+            connection.Open();
+            MySqlCommand command = new MySqlCommand("CREATE DATABASE  IF NOT EXISTS optics", connection);
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+
+        private void FillTables()
         {
             MySqlConnection connection = new MySqlConnection(Connection.conn);
             connection.Open();
@@ -30,7 +39,11 @@ namespace Optics
                 comboBox1.Items.Add(reader.GetValue(0).ToString());
             }
             connection.Close();
-
+        }
+        private void ImportDataForm_Load(object sender, EventArgs e)
+        {
+            DbExists();
+            FillTables();
             button1.Enabled = false;
         }
 
@@ -73,17 +86,27 @@ namespace Optics
         private int ImportCSV(string csvFilePath, string tableName, MySqlConnection connection)
         {
             int res = 0;
-            using (StreamReader reader = new StreamReader(csvFilePath))
+            using (StreamReader reader = new StreamReader(csvFilePath, Encoding.GetEncoding(1251)))
             {
                 string headerLine = reader.ReadLine();
                 string[] headers = headerLine.Split(';');
-
+                string query = "";
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
                     string[] values = line.Split(';');
 
-                    string query = $"INSERT INTO {tableName} ({string.Join(",", headers)}) VALUES ({string.Join(",", values)})";
+                    switch (tableName)
+                    {
+                        case "role":
+                            query = $"INSERT INTO {tableName} ({String.Join(",", headers)}) VALUES ('{values[0]}')";
+                            break;
+                        case "user":
+                            query = $@"INSERT INTO {tableName} ({String.Join(",", headers)}) 
+                                    VALUES ('{values[0]}', '{values[1]}', '{values[2]}', '{values[3]}', '{values[4]}', '{values[5]}', '{values[6]}')";
+                            break;
+                    }
+                   
                     MySqlCommand command = new MySqlCommand(query, connection);
 
                     res += command.ExecuteNonQuery();
@@ -113,6 +136,8 @@ namespace Optics
                 mySqlConnection.Close();
 
                 MessageBox.Show("Структура базы данных успешно восстановлена!", "Сообщение пользователю", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                comboBox1.Items.Clear();
+                FillTables();
             }
         }
 

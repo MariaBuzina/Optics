@@ -284,6 +284,7 @@
     <Content Include="photo\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="photo\replace.png" />
     <Content Include="photo\лупа.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
