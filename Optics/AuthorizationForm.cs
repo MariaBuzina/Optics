@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -52,6 +53,13 @@ namespace Optics
                         textBox1.Clear();
                         textBox2.Clear();
                         button1.Enabled = false;
+                        button1.Visible = false;
+                        button4.Visible = true;
+                        pictureBox3.Visible = true;
+                        textBox3.Visible = true;
+                        button3.Visible = true;
+                        GenerateCaptcha();
+                        textBox3.Clear();
                         return;
                     }
                 }
@@ -64,6 +72,14 @@ namespace Optics
                     MessageBox.Show("Ошибка авторизации! Такого пользователя не существует!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     textBox1.Clear();
                     textBox2.Clear();
+                    button1.Enabled = false;
+                    button1.Visible = false;
+                    button4.Visible = true;
+                    pictureBox3.Visible = true;
+                    textBox3.Visible = true;
+                    button3.Visible = true;
+                    GenerateCaptcha();
+                    textBox3.Clear();
                 }
             }
         }
@@ -130,7 +146,9 @@ namespace Optics
 
         private void AuthorizationForm_Load(object sender, EventArgs e)
         {
+            GenerateCaptcha();
             button1.Enabled = false;
+            button4.Enabled = false;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -164,6 +182,51 @@ namespace Optics
             {
                 e.Handled = true;
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text != "" || textBox2.Text != "" || textBox3.Text != "")
+            {
+
+                if (textBox3.Text == captchaName)
+                {
+                    Authorization();
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка авторизации! Неверный ввод капчи;", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    textBox1.Clear();
+                    textBox2.Clear();
+                    textBox3.Clear();
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, заполните все поля.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        string captchaName;
+        private void GenerateCaptcha()
+        {
+            string[] captchaFile;
+            captchaFile = Directory.GetFiles(@".\captcha\", "*.png");
+
+            Random random = new Random();
+            int index = random.Next(captchaFile.Length);
+            captchaName = Path.GetFileNameWithoutExtension(captchaFile[index]);
+            pictureBox3.Image = Image.FromFile(captchaFile[index]);
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            button4.Enabled = true;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            GenerateCaptcha();
         }
     }
 }
