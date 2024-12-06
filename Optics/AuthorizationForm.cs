@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Threading;
 
 namespace Optics
 {
@@ -194,15 +195,28 @@ namespace Optics
 
                 if (textBox3.Text == captchaName)
                 {
-                    Authorization();
+                    try
+                    {
+                        Authorization();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Ошибка авторизации! Такого пользователя не существует!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBox1.Clear();
+                        textBox2.Clear();
+                        textBox3.Clear();
+                        Thread.Sleep(10000);
+                        GenerateCaptcha();
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Ошибка авторизации! Неверный ввод капчи;", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ошибка авторизации! Неверный ввод капчи.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     textBox1.Clear();
                     textBox2.Clear();
                     textBox3.Clear();
-
+                    Thread.Sleep(10000);
+                    GenerateCaptcha();
                 }
             }
             else
