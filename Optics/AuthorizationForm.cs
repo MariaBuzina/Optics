@@ -208,6 +208,9 @@ namespace Optics
             }
         }
         string captchaName;
+        /// <summary>
+        /// Генерация капчи
+        /// </summary>
         private void GenerateCaptcha()
         {
             string[] captchaFile;
