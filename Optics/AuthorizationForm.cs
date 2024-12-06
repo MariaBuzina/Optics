@@ -184,6 +184,9 @@ namespace Optics
             }
         }
 
+        /// <summary>
+        /// Авторизация с капчой
+        /// </summary>
         private void button4_Click(object sender, EventArgs e)
         {
             if (textBox1.Text != "" || textBox2.Text != "" || textBox3.Text != "")
